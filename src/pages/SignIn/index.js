@@ -1,8 +1,11 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+
+import {signInRequest} from '../../store/modules/auth/actions';
+
 import {Image} from 'react-native';
 
 import logo from '../../assets/chuva_logo.jpg';
-
 import Background from '../../components/Background';
 
 import {
@@ -16,7 +19,17 @@ import {
 
 const SignIn = ({navigation}) => {
   const passwordRef = useRef();
-  function handleSubmit() {}
+  const {loading} = useSelector((state) => state.auth);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
+
+  function handleSubmit() {
+    dispatch(signInRequest(email, password));
+  }
+
   return (
     <Background>
       <Container>
@@ -30,6 +43,8 @@ const SignIn = ({navigation}) => {
             placeholder="E-mail"
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
+            value={email}
+            onChangeText={setEmail}
           />
 
           <FormInput
@@ -39,9 +54,13 @@ const SignIn = ({navigation}) => {
             ref={passwordRef}
             returnKeyType="default"
             onSubmitEditing={handleSubmit}
+            value={password}
+            onChangeText={setPassword}
           />
 
-          <SubmitButton onPress={handleSubmit}>Login</SubmitButton>
+          <SubmitButton loading={loading} onPress={handleSubmit}>
+            Login
+          </SubmitButton>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignUp')}>
