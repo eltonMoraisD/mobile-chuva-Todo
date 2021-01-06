@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Image} from 'react-native';
 
 import logo from '../../assets/chuva_logo.jpg';
@@ -15,6 +15,10 @@ import {
 } from './styles';
 
 const SignUp = ({navigation}) => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  function handleSubmit() {}
   return (
     <Background>
       <Container>
@@ -25,6 +29,8 @@ const SignUp = ({navigation}) => {
             auttoCorrect={false}
             autoCapitalize="none"
             placeholder="Name"
+            returnKeyType="next"
+            onSubmitEditing={() => emailRef.current.focus()}
           />
           <FormInput
             icon="mail-outline"
@@ -32,15 +38,20 @@ const SignUp = ({navigation}) => {
             auttoCorrect={false}
             autoCapitalize="none"
             placeholder="E-mail"
+            returnKeyType="next"
+            ref={emailRef}
+            onSubmitEditing={() => passwordRef.current.focus()}
           />
 
           <FormInput
             icon="lock-outline"
             secureTextEntry
             placeholder="Password"
+            ref={passwordRef}
+            onSubmitEditing={handleSubmit}
           />
 
-          <SubmitButton onPress={() => {}}>Register</SubmitButton>
+          <SubmitButton onPress={handleSubmit}>Register</SubmitButton>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignIn')}>
