@@ -20,3 +20,6 @@
 ## Run Application
     - run command ->  yarn start
     - run command -> npx react-native run-android or npx react-native run-ios
+    
+## Link for the API/Backend
+  - https://github.com/eltonMoraisD/Api-chuva-toDo
