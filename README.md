@@ -18,5 +18,5 @@
      - run command -> **yarn** or **npm install**
       
 ## Run Application
-    - run command  yarn start
-    - run command  npx react-native run-android or npx react-native run-ios
+    - run command ->  yarn start
+    - run command -> npx react-native run-android or npx react-native run-ios
