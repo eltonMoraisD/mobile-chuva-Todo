@@ -19,13 +19,13 @@ const Card = ({data, handleDelete}) => {
 
       <Right>
         <TouchableOpacity
-          ctiveOpacity={0.5}
+          activeOpacity={0.5}
           onPress={() => console.tron.log('botao update')}>
           <UpdateIcon source={require('../../assets/updateIconTodo.svg')} />
         </TouchableOpacity>
 
         <TouchableOpacity
-          ctiveOpacity={0.5}
+          activeOpacity={0.5}
           onPress={() => handleDelete(data._id)}>
           <DeleteTodo source={require('../../assets/deleteIconTodo.svg')} />
         </TouchableOpacity>

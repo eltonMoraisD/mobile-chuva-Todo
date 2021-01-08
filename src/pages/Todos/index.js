@@ -1,46 +1,42 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-
-import {Image} from 'react-native';
-
+import {useDispatch} from 'react-redux';
+import {Image, TouchableOpacity} from 'react-native';
 import api from '../../services/api';
-
 import Background from '../../components/Background';
 import CardTodo from '../../components/CardTodo';
-
-import {Container, Form, FormInput, SubmitButton, List} from './styles';
-
+import {Container, Form, FormInput, SubmitButton, Logout, List} from './styles';
 import {store} from '../../store';
 import {todoRequest} from '../../store/modules/todo/actions';
+import {signOut} from '../../store/modules/auth/actions';
 
 const Todos = () => {
   const dispatch = useDispatch();
 
   const [stateTodos, setTodos] = useState([]);
-  const [dependencies, setDependencies] = useState(false);
   let textInput;
   let textValue = '';
 
   useEffect(() => {
     async function listTodos() {
       const token = store.getState().auth.token;
+
       const response = await api.get('/user/todos', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
         },
       });
+
       setTodos(response.data);
     }
     listTodos();
-  }, [setTodos]);
+  }, []);
 
   const handleSubmit = (data) => {
     if (textValue.trim() !== '' && textValue.length > 0) {
       setTodos((prev) => {
         return [...prev, data];
       });
-      setDependencies(true);
       dispatch(todoRequest(textValue));
     }
 
@@ -64,10 +60,19 @@ const Todos = () => {
     deleteTodo();
   };
 
-  const _onChangeText = (text) => (textValue = text);
+  const handleLogout = () => {
+    dispatch(signOut());
+  };
+
+  const onChangeText = (text) => (textValue = text);
 
   return (
     <Background>
+      <Logout>
+        <TouchableOpacity activeOpacity={0.5} onPress={handleLogout}>
+          <Image source={require('../../assets/power-off-icon.svg')} />
+        </TouchableOpacity>
+      </Logout>
       <Container>
         <Image source={require('../../assets/complete-logo.svg')} />
         <Form>
@@ -75,9 +80,9 @@ const Todos = () => {
             icon="event"
             auttoCorrect={false}
             placeholder="Create To-Do"
-            onChangeText={_onChangeText}
+            onChangeText={onChangeText}
             onSubmitEditing={handleSubmit}
-            defaultValue={stateTodos.description}
+            value={stateTodos.description}
           />
           <SubmitButton onPress={handleSubmit}>Add</SubmitButton>
         </Form>

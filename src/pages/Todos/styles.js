@@ -31,6 +31,14 @@ export const SubmitButton = styled(Button)`
   height: 50px;
 `;
 
+export const Logout = styled.View`
+  display: flex;
+  align-self: flex-end;
+  position: relative;
+  top: 50px;
+  right: 40px;
+`;
+
 export const List = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: {paddingTop: 30},
