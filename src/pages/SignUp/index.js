@@ -6,8 +6,7 @@ import {Image} from 'react-native';
 import logo from '../../assets/chuva_logo.jpg';
 
 import Background from '../../components/Background';
-
-import {signUpRequest} from '../../store/modules/auth/actions';
+import {signUpRequest, signFailure} from '../../store/modules/auth/actions';
 
 import {
   Container,
@@ -32,6 +31,8 @@ const SignUp = ({navigation}) => {
 
   function handleSubmit() {
     dispatch(signUpRequest(name, email, password));
+
+    navigation.navigate('SignIn');
   }
   return (
     <Background>
