@@ -1,14 +1,14 @@
 export function todoRequest(data) {
   return {
     type: '@todo/TODO_REQUEST',
-    payload: { data },
+    payload: {data},
   };
 }
 
 export function todoSuccess(todo) {
   return {
     type: '@todo/TODO_SUCCESS',
-    payload: { todo }, //devia receber um text
+    payload: {todo},
   };
 }
 

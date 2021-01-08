@@ -16,7 +16,6 @@ export function* login({payload}) {
     const {token, user} = response.data;
 
     yield put(signInSuccess(token, user));
-    // history.push('/todo-list');
   } catch (error) {
     Alert.alert('Login fail');
     yield put(signFailure());
@@ -31,16 +30,13 @@ export function* register({payload}) {
       email,
       password,
     });
-    // history.back('/');
   } catch (err) {
     Alert.alert('Register fail');
     yield put(signFailure());
   }
 }
 
-export function sair() {
-  // history.back('/');
-}
+export function sair() {}
 
 export default all([
   takeLatest('@auth/SIGN_IN_REQUEST', login),

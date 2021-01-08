@@ -10,7 +10,7 @@ export function* createTodo({payload}) {
 
   try {
     const todo = payload.data;
-
+    console.tron.log('Todo', todo);
     const response = yield call(
       api.post,
       '/user/create-todos',
@@ -22,7 +22,8 @@ export function* createTodo({payload}) {
         },
       },
     );
-    Alert.alert('To-do created');
+
+    console.tron.log('RESPONSE', response.data);
     yield put(todoSuccess(response.data));
   } catch (error) {
     Alert.alert('ERROR, to-do not created');
