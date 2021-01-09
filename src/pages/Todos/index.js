@@ -34,7 +34,7 @@ const Todos = () => {
   const handleSubmit = (data) => {
     if (textValue.trim() !== '' && textValue.length > 0) {
       setTodos((prev) => {
-        return [...prev, data];
+        return [...prev, textValue];
       });
       dispatch(todoRequest(textValue));
     }
@@ -81,6 +81,7 @@ const Todos = () => {
             onChangeText={onChangeText}
             onSubmitEditing={handleSubmit}
             value={stateTodos.description}
+            ref={(el) => (textInput = el)}
           />
           <SubmitButton onPress={handleSubmit}>Add</SubmitButton>
         </Form>
