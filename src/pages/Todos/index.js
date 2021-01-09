@@ -17,9 +17,8 @@ const Todos = () => {
   let textValue = '';
 
   useEffect(() => {
+    const token = store.getState().auth.token;
     async function listTodos() {
-      const token = store.getState().auth.token;
-
       const response = await api.get('/user/todos', {
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +29,7 @@ const Todos = () => {
       setTodos(response.data);
     }
     listTodos();
-  }, []);
+  }, [stateTodos.length]);
 
   const handleSubmit = (data) => {
     if (textValue.trim() !== '' && textValue.length > 0) {
@@ -45,7 +44,6 @@ const Todos = () => {
 
   const handleDelete = (id) => {
     const token = store.getState().auth.token;
-
     async function deleteTodo() {
       try {
         await api.delete(`/user/delete-todos/${id}`, {
@@ -54,9 +52,9 @@ const Todos = () => {
             Authorization: 'Bearer ' + token,
           },
         });
+        setTodos(...stateTodos);
       } catch (error) {}
     }
-
     deleteTodo();
   };
 
