@@ -7,7 +7,7 @@
 <img src="src/screenshot/login-screen.jpg" width="300"> <img src="src/screenshot/register-screen.jpg" width="300"> <img src="src/screenshot/to-do-screen.jpg" width="300">
 
 
-## Technologies used
+## Technologies used 
   - React Native
   - Redux/Redux-saga/Redux-persist
   - Axios
